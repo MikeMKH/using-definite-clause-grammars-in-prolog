@@ -63,6 +63,23 @@ test(parse_post_tree_nodes_abcd) :-
         node(c, nil, nil)),
       node(d, nil, nil))),
     [c, b, d, a])).
+  
+nt1, [b] --> [a].
+nt2      --> [b].
+
+test(pharse_compose_nt1_nt2_given_a) :-
+  assertion(phrase((nt1, nt2), [a])).
+
+test(pharse_nt1_given_a_returns_b) :-
+  phrase(nt1, [a], R),
+  assertion(R == [b]).
+
+look_ahead(T), [T] --> [T].
+
+test(look_ahead_returns_given) :-
+  phrase(look_ahead(T), [x], R),
+  assertion(T == x),
+  assertion(R == [x]).
 
 :- end_tests(course).
 :- run_tests.
