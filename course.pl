@@ -86,6 +86,16 @@ num_leaves(node(_,Left,Right)) -->
   num_leaves(Left),
   num_leaves(Right).
 
+% ?- listing(num_leaves//1).
+% plunit_course:num_leaves(nil, [A|B], C) :-
+%     D is A+1,
+%     E=B,
+%     C=[D|E].
+% plunit_course:num_leaves(node(_, Left, Right), A, B) :-
+%     num_leaves(Left, A, C),
+%     num_leaves(Right, C, B).
+% true.
+
 test(num_leaves_counts_number_of_leaves) :-
   phrase(num_leaves(
     node(a,
