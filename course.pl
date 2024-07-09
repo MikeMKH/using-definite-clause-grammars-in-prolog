@@ -105,6 +105,31 @@ test(num_leaves_counts_number_of_leaves) :-
     [0], [N]),
   assertion(N =:= 5).
 
+:- use_module(library(clpfd)).
+
+tree_sum(nil, Sum) --> { Sum #= 0 }.
+tree_sum(node(Value, Left, Right), Sum) -->
+    tree_sum(Left, LSum),
+    tree_sum(Right, RSum),
+    { Sum #= Value + LSum + RSum }.
+
+sum_tree(Tree, Sum) :-
+    phrase(tree_sum(Tree, Sum), []).
+
+test(sum_tree_returns_sum_of_all_values) :-
+  sum_tree(
+    node(1,
+      node(2, nil, nil),
+      node(3,
+        node(4, nil, nil),
+        nil)),
+    Sum),
+  assertion(Sum =:= 10).
+
+test(sum_tree_returns_sum_of_all_values_for_empty_trees) :-
+  sum_tree(nil, Sum),
+  assertion(Sum =:= 0).
+
 like(What) --> "I like ", list(What), ".", list(_).
 
 list([]) --> [].
