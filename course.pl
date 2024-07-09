@@ -95,6 +95,17 @@ test(num_leaves_counts_number_of_leaves) :-
     [0], [N]),
   assertion(N =:= 5).
 
+like(What) --> "I like ", list(What), ".", list(_).
+
+list([]) --> [].
+list([L|Ls]) --> [L], list(Ls).
+
+:- set_prolog_flag(double_quotes, codes).
+
+test(like_I_like_it, all(What == [[105, 116]])) :-
+  phrase(like(What), "I like it. The rest is ignored"),
+  assertion(atom_codes('it', What)).
+
 :- end_tests(course).
 :- run_tests.
 
