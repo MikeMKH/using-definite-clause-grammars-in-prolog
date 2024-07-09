@@ -81,6 +81,20 @@ test(look_ahead_returns_given) :-
   assertion(T == x),
   assertion(R == [x]).
 
+num_leaves(nil), [N1] --> [N0], { N1 is N0 + 1 }.
+num_leaves(node(_,Left,Right)) -->
+  num_leaves(Left),
+  num_leaves(Right).
+
+test(num_leaves_counts_number_of_leaves) :-
+  phrase(num_leaves(
+    node(a,
+      node(b,nil,nil),
+      node(c,nil,
+        node(d,nil,nil)))),
+    [0], [N]),
+  assertion(N =:= 5).
+
 :- end_tests(course).
 :- run_tests.
 
