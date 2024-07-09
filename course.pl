@@ -116,6 +116,18 @@ tree_sum(node(Value, Left, Right), Sum) -->
 sum_tree(Tree, Sum) :-
     phrase(tree_sum(Tree, Sum), []).
 
+% ?- sum_tree(Tree, 2).
+% Tree = node(2, nil, nil) ;
+% Tree = node(_A, nil, node(_B, nil, nil)),
+% clpfd: #=(_A+_B, 2) ;
+% Tree = node(_A, nil, node(_B, nil, node(_C, nil, nil))),
+% clpfd: #=(_D, _B+_C),
+% clpfd: #=(_A+_D, 2) ;
+% Tree = node(_A, nil, node(_B, nil, node(_C, nil, node(_D, nil, nil)))),
+% clpfd: #=(_E, _C+_D),
+% clpfd: #=(_F, _B+_E),
+% clpfd: #=(_A+_F, 2) .
+
 test(sum_tree_returns_sum_of_all_values) :-
   sum_tree(
     node(1,
