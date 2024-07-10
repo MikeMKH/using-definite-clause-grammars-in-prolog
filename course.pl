@@ -142,6 +142,27 @@ test(sum_tree_returns_sum_of_all_values_for_empty_trees) :-
   sum_tree(nil, Sum),
   assertion(Sum =:= 0).
 
+tree_to_list(nil, []).
+tree_to_list(node(Value, nil, nil), [Value]).
+tree_to_list(node(Value, Left, Right), [Value|List]) :-
+    tree_to_list(Left, LList),
+    tree_to_list(Right, RList),
+    append(LList, RList, List).
+
+sum_tree1(Tree, Sum) :-
+    tree_to_list(Tree, List),
+    sum(List, #=, Sum).
+
+test(sum_tree_automaton_returns_sum_of_all_values, all(Sum=[10])) :-
+  sum_tree1(
+    node(1,
+      node(2, nil, nil),
+      node(3,
+        node(4, nil, nil),
+        nil)),
+    Sum),
+  assertion(Sum =:= 10).
+
 like(What) --> "I like ", list(What), ".", list(_).
 
 list([]) --> [].
