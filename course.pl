@@ -306,3 +306,37 @@ tree_nodes(node(Name, Left, Right), [_|Ls0], Ls) -->
 % ^  Exit: (11) phrase(user:tree_nodes(node(a, nil, node(b, nil, node(c, nil, nil))), [a, b, c], []), [a, b, c]) ? creep
 % Ns = [a, b, c],
 % Tree = node(a, nil, node(b, nil, node(c, nil, nil))) .
+
+% from ChatGPT https://chatgpt.com/share/7af8099a-d0fd-43b3-8095-a3cd46b2637a
+sentence --> article, noun, verb, noun.
+
+article --> [a].
+article --> [the].
+
+noun --> [cat].
+noun --> [dog].
+noun --> [mouse].
+
+verb --> [eats].
+verb --> [chases].
+
+% ?- phrase(sentence, S).
+% S = [a, cat, eats, cat] ;
+% S = [a, cat, eats, dog] ;
+% S = [a, cat, eats, mouse] ;
+% S = [a, cat, chases, cat] ;
+% S = [a, cat, chases, dog] ;
+% S = [a, cat, chases, mouse] ;
+% S = [a, dog, eats, cat] ;
+% S = [a, dog, eats, dog] ;
+% S = [a, dog, eats, mouse] ;
+% S = [a, dog, chases, cat] ;
+% S = [a, dog, chases, dog] ;
+% S = [a, dog, chases, mouse] ;
+% S = [a, mouse, eats, cat] ;
+% S = [a, mouse, eats, dog] ;
+% S = [a, mouse, eats, mouse] ;
+% S = [a, mouse, chases, cat] ;
+% S = [a, mouse, chases, dog] ;
+% S = [a, mouse, chases, mouse] ;
+% S = [the, cat, eats, cat] .
