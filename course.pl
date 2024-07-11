@@ -153,7 +153,7 @@ sum_tree1(Tree, Sum) :-
     tree_to_list(Tree, List),
     sum(List, #=, Sum).
 
-test(sum_tree_automaton_returns_sum_of_all_values, all(Sum=[10])) :-
+test(sum_tree_automaton_returns_sum_of_all_values, all(Sum=[10,10,10,10])) :-
   sum_tree1(
     node(1,
       node(2, nil, nil),
